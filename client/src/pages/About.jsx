@@ -40,7 +40,7 @@ export default function About() {
           </ul>
         </div>
         <div className="min-h-[360px] bg-bone-2">
-          <img src="https://picsum.photos/seed/ransan-studio/1200/900" alt="" className="w-full h-full object-cover" />
+          <img src="https://loremflickr.com/1200/900/tailor,atelier,sewing?lock=4" alt="" className="w-full h-full object-cover" />
         </div>
       </section>
 

@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: ransan-api
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: "7d"
+      - key: BASE_CURRENCY
+        value: INR
+      - key: SUPPORTED_CURRENCIES
+        value: "INR,USD,EUR,GBP"
+      # Match any *.vercel.app preview + prod frontend deploys.
+      - key: CLIENT_ORIGIN_REGEX
+        value: "\\.vercel\\.app$"
+      # Set these manually in the Render dashboard:
+      #   MONGO_URI=mongodb+srv://...   (from Atlas)
+      #   CLIENT_ORIGIN=https://your-frontend.vercel.app
+      #   STRIPE_SECRET_KEY=sk_test_... (optional)

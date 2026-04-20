@@ -29,7 +29,7 @@ export default function Auth() {
   return (
     <div className="grid md:grid-cols-2 min-h-[calc(100vh-64px)]">
       <div className="bg-ink text-bone relative overflow-hidden">
-        <img src="https://picsum.photos/seed/ransan-auth/1000/1400" alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+        <img src="https://loremflickr.com/1000/1400/streetwear,urban?lock=3" alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
         <div className="relative p-12 h-full flex flex-col justify-between min-h-[500px]">
           <Logo className="text-bone" size={28} />
           <div>

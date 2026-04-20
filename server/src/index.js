@@ -14,7 +14,22 @@ import { FX, SYMBOLS } from './utils/currency.js';
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_ORIGIN, credentials: true }));
+// CLIENT_ORIGIN can be a single URL or a comma-separated list.
+// In non-prod, allow any localhost origin and Vercel preview URLs matching CLIENT_ORIGIN_REGEX.
+const allowedOrigins = (process.env.CLIENT_ORIGIN || 'http://localhost:5173')
+  .split(',').map(s => s.trim()).filter(Boolean);
+const originRegex = process.env.CLIENT_ORIGIN_REGEX
+  ? new RegExp(process.env.CLIENT_ORIGIN_REGEX) : null;
+
+app.use(cors({
+  origin(origin, cb) {
+    if (!origin) return cb(null, true); // curl, server-to-server
+    if (allowedOrigins.includes(origin)) return cb(null, true);
+    if (originRegex && originRegex.test(origin)) return cb(null, true);
+    cb(new Error(`CORS: ${origin} not allowed`));
+  },
+  credentials: true,
+}));
 app.use(express.json());
 app.use(morgan('dev'));
 
@@ -43,5 +58,5 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 4000;
 connectDB(process.env.MONGO_URI)
-  .then(() => app.listen(PORT, () => console.log(`[api] http://localhost:${PORT}`)))
+  .then(() => app.listen(PORT, '0.0.0.0', () => console.log(`[api] listening on :${PORT}`)))
   .catch((err) => { console.error('[db]', err.message); process.exit(1); });

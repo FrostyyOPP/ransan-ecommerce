@@ -16,14 +16,34 @@ const COLORS = [
   { name: 'Muted', hex: '#6B6B68' },
 ];
 const SIZES = ['XS','S','M','L','XL','XXL'];
-const img = (seed, n = 4) =>
-  Array.from({ length: n }, (_, i) => `https://picsum.photos/seed/ransan-${seed}-${i}/800/1000`);
+
+// loremflickr serves free, Flickr-CC-licensed images filtered by tag.
+// `lock` makes the same URL return the same image consistently.
+const CATEGORY_TAGS = {
+  tees: 'tshirt,streetwear',
+  hoodies: 'hoodie,streetwear',
+  pants: 'pants,cargo',
+  accessories: 'cap,hat',
+};
+const PRODUCT_TAGS = {
+  'Trucker Cap': 'cap,hat',
+  'Canvas Tote': 'totebag,bag',
+  'Chunky Socks 2-pk': 'socks',
+  'Beanie': 'beanie,hat',
+};
+
+function imagesFor(productName, catSlug, seedBase, n = 4) {
+  const tags = PRODUCT_TAGS[productName] || CATEGORY_TAGS[catSlug] || 'clothing';
+  return Array.from({ length: n }, (_, i) =>
+    `https://loremflickr.com/800/1000/${tags}?lock=${seedBase * 10 + i}`
+  );
+}
 
 const categories = [
-  { name: 'Tees', slug: 'tees', description: 'Heavyweight tees, oversized cuts.', coverImage: 'https://picsum.photos/seed/cat-tees/800/1000', order: 1 },
-  { name: 'Hoodies', slug: 'hoodies', description: 'Streetwear hoodies, garment-washed.', coverImage: 'https://picsum.photos/seed/cat-hoodies/800/1000', order: 2 },
-  { name: 'Pants', slug: 'pants', description: 'Cargo, wide-leg, relaxed fits.', coverImage: 'https://picsum.photos/seed/cat-pants/800/1000', order: 3 },
-  { name: 'Accessories', slug: 'accessories', description: 'Caps, socks, totes.', coverImage: 'https://picsum.photos/seed/cat-access/800/1000', order: 4 },
+  { name: 'Tees', slug: 'tees', description: 'Heavyweight tees, oversized cuts.', coverImage: 'https://loremflickr.com/800/1000/tshirt,streetwear?lock=101', order: 1 },
+  { name: 'Hoodies', slug: 'hoodies', description: 'Streetwear hoodies, garment-washed.', coverImage: 'https://loremflickr.com/800/1000/hoodie,streetwear?lock=102', order: 2 },
+  { name: 'Pants', slug: 'pants', description: 'Cargo, wide-leg, relaxed fits.', coverImage: 'https://loremflickr.com/800/1000/pants,cargo?lock=103', order: 3 },
+  { name: 'Accessories', slug: 'accessories', description: 'Caps, socks, totes.', coverImage: 'https://loremflickr.com/800/1000/cap,hat?lock=104', order: 4 },
 ];
 
 function variantsFor(sizes, colors) {
@@ -75,10 +95,12 @@ async function run() {
   console.log(`[seed] ${cats.length} categories`);
 
   const allProducts = [];
+  let seedBase = 200;
   for (const [slug, items] of Object.entries(productsByCat)) {
     for (const p of items) {
       const sizes = p.sizes || SIZES;
       const colors = p.colors || [COLORS[0], COLORS[1]];
+      seedBase += 1;
       allProducts.push({
         ...p,
         slug: p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
@@ -86,7 +108,7 @@ async function run() {
         description: `${p.name} — heavyweight, premium cotton. Cut for the RanSan silhouette. Boxy, oversized, built to last.`,
         fitNotes: 'Model is 6\'0" wearing M. Runs one size larger than standard.',
         care: 'Machine wash cold. Tumble dry low. Do not bleach.',
-        images: img(p.name.replace(/\s+/g, '-').toLowerCase()),
+        images: imagesFor(p.name, slug, seedBase),
         sizes, colors,
         variants: variantsFor(sizes, colors),
         rating: 4 + Math.random(),

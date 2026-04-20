@@ -19,7 +19,7 @@ export default function Home() {
       {/* HERO */}
       <section className="relative bg-ink text-bone border-b border-ink overflow-hidden">
         <img
-          src="https://picsum.photos/seed/ransan-hero/2000/1200"
+          src="https://loremflickr.com/2000/1200/streetwear,fashion,model?lock=1"
           alt=""
           className="absolute inset-0 w-full h-full object-cover opacity-60"
         />
@@ -95,7 +95,7 @@ export default function Home() {
           </div>
         </div>
         <div className="min-h-[520px] bg-bone-2">
-          <img src="https://picsum.photos/seed/ransan-lookbook/1200/900" alt="" className="w-full h-full object-cover" />
+          <img src="https://loremflickr.com/1200/900/streetwear,editorial?lock=2" alt="" className="w-full h-full object-cover" />
         </div>
       </section>
 
