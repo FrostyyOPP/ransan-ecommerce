@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>RanSan — Project Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: #F2EFE8; color: #0A0A0A; font-family: "Inter", sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 80px 40px; }
+  .mono { font-family: "Space Mono", monospace; letter-spacing: 0.15em; font-size: 11px; text-transform: uppercase; }
+  .disp { font-family: "Archivo Black", sans-serif; text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.9; }
+  h1 { font-size: clamp(72px, 12vw, 180px); margin: 12px 0 0; }
+  h1 .r { color: #D92D1F; font-size: 0.7em; }
+  h1 .y { color: #0A0A0A; -webkit-text-stroke: 2px #0A0A0A; color: transparent; }
+  .rule { height: 1px; background: #0A0A0A; margin: 48px 0; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: #0A0A0A; border: 1px solid #0A0A0A; margin-top: 20px; }
+  .card { background: #F2EFE8; padding: 40px 32px; display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; text-decoration: none; color: inherit; transition: background 0.2s; }
+  .card:hover { background: #E8F249; }
+  .card .n { font-family: "Archivo Black", sans-serif; font-size: 80px; line-height: 1; }
+  .card h2 { font-family: "Archivo Black", sans-serif; font-size: 32px; text-transform: uppercase; margin: 24px 0 4px; }
+  .card p { font-size: 14px; line-height: 1.6; margin: 4px 0 0; color: #333; }
+  .card .go { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.15em; margin-top: 24px; }
+  .ticker { background: #0A0A0A; color: #F2EFE8; padding: 10px 0; overflow: hidden; margin: 48px -9999px 0; }
+  .ticker-inner { white-space: nowrap; animation: scroll 40s linear infinite; }
+  .ticker-inner span { font-family: "Archivo Black", sans-serif; font-size: 14px; letter-spacing: 0.08em; padding: 0 28px; }
+  .ticker-inner .star { color: #E8F249; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-25%); } }
+
+  .sys { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .sys > div { border: 1px solid #0A0A0A; padding: 18px; font-size: 12px; }
+  .sys b { font-family: "Archivo Black", sans-serif; font-size: 14px; letter-spacing: 0.05em; display: block; margin-bottom: 6px; }
+  .sw-row { display: flex; gap: 6px; margin-top: 8px; }
+  .sw-row div { width: 24px; height: 24px; border: 1px solid #0A0A0A; }
+  .meta { display: flex; justify-content: space-between; margin-top: 80px; padding-top: 24px; border-top: 1px solid #0A0A0A; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mono">RANSAN® · STREETWEAR ECOMMERCE · MERN STACK · DROP 04 / S/S '26</div>
+  <h1 class="disp">NOT FOR<br/><span class="y">EVERYONE.</span></h1>
+
+  <div class="rule"></div>
+
+  <div style="display:grid;grid-template-columns:2fr 3fr;gap:60px;">
+    <div class="mono">01 / DELIVERABLES</div>
+    <div>
+      <p style="font-size:17px;line-height:1.6;margin:0 0 8px;">Complete design for a streetwear ecommerce site. 9 screens, from landing through admin dashboard. Wireframes explore structure; hi-fi commits to the aesthetic.</p>
+      <p style="font-size:13px;color:#6B6B68;margin:0;">Built for a MERN backend — admin dashboard mirrors the shape of typical CRUD + analytics routes.</p>
+    </div>
+  </div>
+
+  <div class="cards">
+    <a class="card" href="Wireframes.html">
+      <div>
+        <div class="mono" style="color:#6B6B68">STAGE 01</div>
+        <div class="n">01</div>
+      </div>
+      <div>
+        <h2>Wireframes</h2>
+        <p>Hand-sketched lo-fi for all 9 screens. Drag to pan, scroll/pinch to zoom. Focus on structure and flow.</p>
+        <div class="go">OPEN CANVAS →</div>
+      </div>
+    </a>
+    <a class="card" href="RanSan.html">
+      <div>
+        <div class="mono" style="color:#6B6B68">STAGE 02</div>
+        <div class="n">02</div>
+      </div>
+      <div>
+        <h2>Hi-fi Prototype</h2>
+        <p>Full polished prototype. Interactive PDP (size, qty, accordion), tweakable accent color, screen switcher at bottom.</p>
+        <div class="go">LAUNCH SITE →</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>★ 9 SCREENS</span><span class="star">✱</span>
+      <span>RESPONSIVE LAYOUTS</span><span class="star">✱</span>
+      <span>MERN-READY ADMIN</span><span class="star">✱</span>
+      <span>HEAVYWEIGHT AESTHETIC</span><span class="star">✱</span>
+      <span>★ 9 SCREENS</span><span class="star">✱</span>
+      <span>RESPONSIVE LAYOUTS</span><span class="star">✱</span>
+      <span>MERN-READY ADMIN</span><span class="star">✱</span>
+      <span>HEAVYWEIGHT AESTHETIC</span><span class="star">✱</span>
+      <span>★ 9 SCREENS</span><span class="star">✱</span>
+      <span>RESPONSIVE LAYOUTS</span><span class="star">✱</span>
+      <span>MERN-READY ADMIN</span><span class="star">✱</span>
+      <span>HEAVYWEIGHT AESTHETIC</span><span class="star">✱</span>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:2fr 3fr;gap:60px;margin-top:80px;">
+    <div class="mono">02 / SYSTEM</div>
+    <div>
+      <p style="font-size:17px;line-height:1.6;margin:0;">Bold streetwear — huge monolithic type, heavy rules, acid accents, raw grid. Inspired by the edgy energy of your reference, executed with an original voice for RanSan.</p>
+    </div>
+  </div>
+  <div class="sys">
+    <div>
+      <b>TYPE</b>
+      <div style="font-family:'Archivo Black',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:-0.02em;">Archivo Black</div>
+      <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;margin-top:4px;">SPACE MONO</div>
+      <div style="font-size:13px;margin-top:4px;">Inter — body copy</div>
+    </div>
+    <div>
+      <b>PALETTE</b>
+      <div class="sw-row">
+        <div style="background:#0A0A0A"></div>
+        <div style="background:#F2EFE8"></div>
+        <div style="background:#E8F249"></div>
+        <div style="background:#D92D1F"></div>
+        <div style="background:#2F7D3E"></div>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:#6B6B68;margin-top:8px;letter-spacing:0.1em;">INK · BONE · ACID · BLEED · GREEN</div>
+    </div>
+    <div>
+      <b>SCREENS [ 9 ]</b>
+      <div style="font-family:'Space Mono',monospace;font-size:11px;line-height:1.8;margin-top:4px;">
+        01 HOME<br/>02 SHOP/PLP<br/>03 PDP<br/>04 CART<br/>05 CHECKOUT<br/>06 AUTH<br/>07 SEARCH<br/>08 ABOUT<br/>09 ADMIN
+      </div>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div class="mono" style="color:#6B6B68">RANSAN® / INDEX / V1</div>
+    <div class="mono" style="color:#6B6B68">N 19°04' · E 72°52' · MUMBAI</div>
+  </div>
+</div>
+</body>
+</html>

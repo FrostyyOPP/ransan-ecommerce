@@ -1,0 +1,19 @@
+/* RanSan Design Tokens */
+:root {
+  --ink: #0A0A0A;
+  --bg: #F2EFE8;
+  --bg-2: #E8E4DA;
+  --line: #0A0A0A;
+  --muted: #6B6B68;
+  --acid: oklch(0.92 0.19 105);  /* yellow */
+  --red: oklch(0.58 0.22 27);    /* bleed red */
+  --white: #FFFFFF;
+
+  --font-display: "Archivo Black", "Impact", sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+.ransan-bg { background: var(--bg); color: var(--ink); font-family: var(--font-body); }
+.mono { font-family: var(--font-mono); letter-spacing: 0.02em; }
+.display { font-family: var(--font-display); letter-spacing: -0.02em; line-height: 0.9; text-transform: uppercase; }

@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>RanSan — Wireframes</title>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #f0eee9; font-family: 'Kalam', cursive; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="shared/design-canvas.jsx"></script>
+<script type="text/babel" src="wireframes/wf-components.jsx"></script>
+<script type="text/babel" src="wireframes/wf-home.jsx"></script>
+<script type="text/babel" src="wireframes/wf-plp.jsx"></script>
+<script type="text/babel" src="wireframes/wf-pdp.jsx"></script>
+<script type="text/babel" src="wireframes/wf-cart-checkout.jsx"></script>
+<script type="text/babel" src="wireframes/wf-rest.jsx"></script>
+<script type="text/babel">
+const App = () => (
+  <DesignCanvas>
+    <div style={{ padding: '20px 60px 40px', maxWidth: 900 }}>
+      <div style={{ fontFamily: '"Caveat", cursive', fontSize: 56, fontWeight: 700, color: '#1a1a1a', lineHeight: 0.95 }}>RanSan — Wireframes</div>
+      <div style={{ fontSize: 15, color: '#555', marginTop: 6, maxWidth: 640 }}>
+        Lo-fi structure &amp; flow for all screens. Hand-drawn to keep focus on layout, not style. Drag to pan, scroll/pinch to zoom. Hi-fi designs live in <b>RanSan.html</b>.
+      </div>
+      <div style={{ display: 'flex', gap: 8, marginTop: 14, flexWrap: 'wrap' }}>
+        {['Home','PLP','PDP','Cart','Checkout','Auth','Search','About','Admin'].map(s =>
+          <span key={s} style={{ border: '2px solid #1a1a1a', padding: '4px 10px', fontFamily: '"Caveat", cursive', fontSize: 18 }}>{s}</span>
+        )}
+      </div>
+    </div>
+
+    <DCSection title="01 — Home / Landing" subtitle="Hero drop, ticker, categories, new this week, lookbook, newsletter">
+      <DCArtboard label="Home · 1100w">
+        <WireframeHome />
+      </DCArtboard>
+    </DCSection>
+
+    <DCSection title="02 — Product Listing (PLP)" subtitle="Filters sidebar, chip row, product grid w/ swatches, pagination">
+      <DCArtboard label="Shop / Tees">
+        <WireframePLP />
+      </DCArtboard>
+    </DCSection>
+
+    <DCSection title="03 — Product Detail (PDP)" subtitle="Gallery, size/color, shipping, accordion, reviews, related">
+      <DCArtboard label="Oversized Box Tee">
+        <WireframePDP />
+      </DCArtboard>
+    </DCSection>
+
+    <DCSection title="04 — Cart + Checkout" subtitle="Bag summary → 3-step checkout">
+      <DCArtboard label="Cart">
+        <WireframeCart />
+      </DCArtboard>
+      <DCArtboard label="Checkout · step 1">
+        <WireframeCheckout />
+      </DCArtboard>
+    </DCSection>
+
+    <DCSection title="05 — Auth & Search" subtitle="Split login, search results">
+      <DCArtboard label="Login / Signup"><WireframeAuth /></DCArtboard>
+      <DCArtboard label="Search results"><WireframeSearch /></DCArtboard>
+    </DCSection>
+
+    <DCSection title="06 — About & Admin" subtitle="Brand story, MERN admin dashboard">
+      <DCArtboard label="About"><WireframeAbout /></DCArtboard>
+      <DCArtboard label="Admin dashboard"><WireframeAdmin /></DCArtboard>
+    </DCSection>
+  </DesignCanvas>
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
