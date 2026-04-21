@@ -9,6 +9,8 @@ import categoryRoutes from './routes/categories.js';
 import cartRoutes from './routes/cart.js';
 import orderRoutes from './routes/orders.js';
 import paymentRoutes from './routes/payments.js';
+import reviewRoutes from './routes/reviews.js';
+import userRoutes from './routes/users.js';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
 import { FX, SYMBOLS } from './utils/currency.js';
 
@@ -52,6 +54,8 @@ app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/users', userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

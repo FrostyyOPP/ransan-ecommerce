@@ -7,8 +7,8 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const { category, q, size, color, minPrice, maxPrice, tag, sort = 'newest', page = 1, limit = 24 } = req.query;
-    const filter = { isActive: true };
+    const { category, q, size, color, minPrice, maxPrice, tag, sort = 'newest', page = 1, limit = 24, includeInactive } = req.query;
+    const filter = includeInactive === 'true' ? {} : { isActive: true };
 
     if (category) {
       const cat = await Category.findOne({ slug: category.toLowerCase() });

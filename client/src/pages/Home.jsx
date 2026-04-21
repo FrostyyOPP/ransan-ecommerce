@@ -33,7 +33,7 @@ export default function Home() {
           </h1>
           <div className="flex flex-wrap gap-3 mt-8 md:mt-12">
             <Link to="/shop"><BigBtn variant="acid">SHOP DROP 04 →</BigBtn></Link>
-            <BigBtn className="!bg-transparent !text-bone !border-bone">THE LOOKBOOK</BigBtn>
+            <Link to="/about"><BigBtn className="!bg-transparent !text-bone !border-bone">THE LOOKBOOK</BigBtn></Link>
           </div>
         </div>
         <div className="hidden md:block absolute top-5 right-8 text-right font-mono text-[10px] tracking-wider2">

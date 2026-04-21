@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import Logo from './Logo';
+import QuickSearch from './QuickSearch';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
@@ -12,6 +13,7 @@ export default function TopNav() {
   const nav = useNavigate();
   const loc = useLocation();
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => { setOpen(false); }, [loc.pathname]);
   useEffect(() => {
@@ -23,11 +25,11 @@ export default function TopNav() {
     `font-mono text-[11px] tracking-wider2 ${isActive ? 'underline underline-offset-4' : 'text-ink hover:text-bleed'}`;
 
   return (
+    <>
     <header className="border-b border-ink bg-bone sticky top-0 z-30">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center gap-4">
         <Link to="/" className="flex-shrink-0"><Logo size={20} /></Link>
 
-        {/* desktop nav */}
         <nav className="hidden lg:flex gap-6 ml-4">
           <NavLink to="/shop" className={link}>SHOP</NavLink>
           <NavLink to="/shop/tees" className={link}>TEES</NavLink>
@@ -38,19 +40,22 @@ export default function TopNav() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2 md:gap-4">
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="font-mono text-[11px] tracking-wider2 hover:text-bleed flex items-center gap-1"
+            aria-label="search">
+            <span>⌕</span><span className="hidden md:inline">SEARCH</span>
+          </button>
           <select
             value={currency} onChange={(e) => setCurrency(e.target.value)}
             className="font-mono text-[11px] tracking-wider2 bg-transparent border border-ink px-2 py-1">
             {supported.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
-          <NavLink to="/search" className={`${link({ isActive: false })} hidden md:inline`}>SEARCH</NavLink>
           {user && user.role === 'admin' && (
             <NavLink to="/admin" className={`${link({ isActive: false })} hidden md:inline`}>ADMIN</NavLink>
           )}
           {user ? (
-            <button onClick={() => { logout(); nav('/'); }} className="font-mono text-[11px] tracking-wider2 hover:text-bleed hidden md:inline">
-              LOGOUT
-            </button>
+            <NavLink to="/account" className={`${link({ isActive: false })} hidden md:inline`}>ACCOUNT</NavLink>
           ) : (
             <NavLink to="/auth" className={`${link({ isActive: false })} hidden md:inline`}>LOG IN</NavLink>
           )}
@@ -58,7 +63,6 @@ export default function TopNav() {
             BAG ({count})
           </Link>
 
-          {/* mobile hamburger */}
           <button
             onClick={() => setOpen(!open)}
             aria-label="menu"
@@ -68,7 +72,6 @@ export default function TopNav() {
         </div>
       </div>
 
-      {/* mobile sheet */}
       {open && (
         <div className="lg:hidden border-t border-ink bg-bone">
           <nav className="flex flex-col">
@@ -78,8 +81,8 @@ export default function TopNav() {
               ['/shop/hoodies', 'HOODIES'],
               ['/shop/pants', 'PANTS'],
               ['/shop/accessories', 'ACCESSORIES'],
-              ['/search', 'SEARCH'],
               ['/about', 'ABOUT'],
+              ...(user ? [['/account', 'ACCOUNT']] : []),
               ...(user?.role === 'admin' ? [['/admin', 'ADMIN']] : []),
             ].map(([to, label]) => (
               <NavLink key={to} to={to}
@@ -100,5 +103,7 @@ export default function TopNav() {
         </div>
       )}
     </header>
+    {searchOpen && <QuickSearch onClose={() => setSearchOpen(false)} />}
+    </>
   );
 }

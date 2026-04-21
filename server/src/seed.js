@@ -6,6 +6,7 @@ import Category from './models/Category.js';
 import Product from './models/Product.js';
 import Cart from './models/Cart.js';
 import Order from './models/Order.js';
+import Review from './models/Review.js';
 
 const COLORS = [
   { name: 'Black', hex: '#0A0A0A' },
@@ -87,6 +88,7 @@ async function run() {
   await Promise.all([
     User.deleteMany({}), Category.deleteMany({}),
     Product.deleteMany({}), Cart.deleteMany({}), Order.deleteMany({}),
+    Review.deleteMany({}),
   ]);
   console.log('[seed] collections cleared');
 
@@ -152,6 +154,42 @@ async function run() {
     payment: { provider: 'stripe-mock', status: 'succeeded' },
   });
   console.log('[seed] sample order created');
+
+  // Seed a few reviews so PDP isn't empty.
+  const reviewers = [
+    { name: 'Rahul · Mumbai', rating: 5, title: 'Heavyweight and boxy', body: 'Exactly what I wanted. Fabric feels premium, no shrinkage after wash. Fit runs a bit oversized — true to description.', size: 'M', color: 'Black' },
+    { name: 'Arjun · Bangalore', rating: 5, title: 'Best tee I own', body: 'Bought 3 colors after the first one. The drop shoulder sits perfectly. Worth every rupee.', size: 'L', color: 'Bone' },
+    { name: 'Karan · Delhi', rating: 4, title: 'Nice fit, shipping delayed', body: 'Love the tee but shipping took a week. Once arrived, quality is top. Will buy again.', size: 'M', color: 'Acid' },
+    { name: 'Priya · Pune', rating: 5, title: 'Obsessed', body: 'Soft, heavy, looks way more expensive than it is. Got compliments immediately.', size: 'S', color: 'Black' },
+    { name: 'Dev · Hyderabad', rating: 4, title: 'Solid cop', body: 'Oversized as promised. Could use one more wash before it settles but very happy.', size: 'L', color: 'Bleed Red' },
+  ];
+  // Create two extra demo users to author these reviews (reviews unique per user/product).
+  const reviewUsers = await Promise.all(reviewers.map(async (r, i) =>
+    User.create({
+      name: r.name.split(' · ')[0],
+      email: `reviewer${i}@ransan.com`,
+      passwordHash: await User.hashPassword('review123'),
+    })
+  ));
+
+  let reviewCount = 0;
+  for (const p of created.slice(0, 6)) {
+    for (let i = 0; i < 3; i++) {
+      const r = reviewers[(reviewCount + i) % reviewers.length];
+      const reviewer = reviewUsers[(reviewCount + i) % reviewUsers.length];
+      await Review.create({
+        product: p._id, user: reviewer._id, userName: r.name,
+        rating: r.rating, title: r.title, body: r.body,
+        boughtSize: r.size, boughtColor: r.color,
+      });
+      reviewCount += 1;
+    }
+    const all = await Review.find({ product: p._id }).lean();
+    p.rating = Math.round((all.reduce((s, r) => s + r.rating, 0) / all.length) * 10) / 10;
+    p.reviewsCount = all.length;
+    await p.save();
+  }
+  console.log(`[seed] ${reviewCount} reviews across ${Math.min(6, created.length)} products`);
 
   await mongoose.disconnect();
   console.log('[seed] done');

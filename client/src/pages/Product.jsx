@@ -3,6 +3,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { api } from '../api';
 import BigBtn from '../components/BigBtn';
 import ProductCard from '../components/ProductCard';
+import SizeGuide from '../components/SizeGuide';
+import Reviews from '../components/Reviews';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
@@ -19,6 +21,7 @@ export default function Product() {
   const [qty, setQty] = useState(1);
   const [openAcc, setOpenAcc] = useState('desc');
   const [busy, setBusy] = useState(false);
+  const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
 
   useEffect(() => {
     setData(null);
@@ -97,7 +100,7 @@ export default function Product() {
           <Divider />
           <div className="flex justify-between font-mono text-[11px] tracking-wider mb-2">
             <span>SIZE: <b>{size || '—'}</b></span>
-            <span className="underline cursor-pointer">SIZE GUIDE ↗</span>
+            <button type="button" onClick={() => setSizeGuideOpen(true)} className="underline">SIZE GUIDE ↗</button>
           </div>
           <div className="grid grid-cols-6 gap-1">
             {product.sizes?.map(s =>
@@ -141,6 +144,8 @@ export default function Product() {
         </aside>
       </div>
 
+      <Reviews productId={product._id} />
+
       {related?.length > 0 && (
         <section className="px-4 md:px-6 py-10 md:py-14 border-t border-ink">
           <h2 className="font-display text-3xl md:text-4xl uppercase mb-5 md:mb-6">Pair It With.</h2>
@@ -149,6 +154,8 @@ export default function Product() {
           </div>
         </section>
       )}
+
+      <SizeGuide open={sizeGuideOpen} onClose={() => setSizeGuideOpen(false)} />
     </>
   );
 }

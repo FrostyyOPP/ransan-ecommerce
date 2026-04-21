@@ -3,13 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { api } from '../api';
 import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
+import { useToast } from '../context/ToastContext';
 import BigBtn from '../components/BigBtn';
 
 export default function Checkout() {
   const { cart, subtotalINR, refresh } = useCart();
   const { format, currency } = useCurrency();
+  const toast = useToast();
   const nav = useNavigate();
   const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState('');
   const [form, setForm] = useState({
     name: '', line1: '', line2: '', city: '', state: '', pincode: '', country: 'IN', phone: '',
   });
@@ -20,19 +23,22 @@ export default function Checkout() {
 
   async function submit(e) {
     e.preventDefault();
-    setBusy(true);
+    setErr(''); setBusy(true);
     try {
       const { data: order } = await api.post('/orders', { shipping: form, displayCurrency: currency });
       const { data: session } = await api.post('/payments/checkout-session', { orderId: order._id });
       await refresh();
       if (session.mocked) {
         await api.post('/payments/confirm-mock', { orderId: order._id });
+        toast.success(`Order #${order.orderNo} placed`);
         nav(`/order/${order._id}?paid=1`);
       } else {
         window.location = session.url;
       }
-    } catch (err) {
-      alert(err.response?.data?.error || err.message);
+    } catch (e) {
+      const msg = e.response?.data?.error || e.message;
+      setErr(msg);
+      toast.error(msg);
     } finally { setBusy(false); }
   }
 
@@ -61,6 +67,7 @@ export default function Checkout() {
           Add a real Stripe key in <code>server/.env</code> for live payments.
         </div>
 
+        {err && <div className="font-mono text-xs text-bleed border border-bleed bg-bleed/10 p-3">{err}</div>}
         <BigBtn type="submit" variant="acid" disabled={busy} className="w-full !py-4">
           {busy ? 'PLACING ORDER…' : `PAY ${format(totalINR)} →`}
         </BigBtn>
