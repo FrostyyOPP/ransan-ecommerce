@@ -26,12 +26,12 @@ export default function Admin() {
   if (!user || user.role !== 'admin') return <Navigate to="/" />;
 
   return (
-    <div className="grid grid-cols-[240px_1fr] bg-[#f5f5f4] min-h-screen">
+    <div className="md:grid md:grid-cols-[240px_1fr] bg-[#f5f5f4] min-h-screen">
       {/* SIDEBAR */}
-      <aside className="bg-ink text-bone p-6 sticky top-0 h-screen">
+      <aside className="bg-ink text-bone p-4 md:p-6 md:sticky md:top-0 md:h-screen">
         <div className="font-display text-xl">RANSAN®</div>
         <div className="font-mono text-[10px] tracking-wider2 text-acid mt-1">/ADMIN</div>
-        <nav className="mt-8 space-y-1 font-mono text-xs tracking-wider">
+        <nav className="mt-4 md:mt-8 flex md:flex-col gap-1 md:space-y-1 font-mono text-xs tracking-wider overflow-x-auto">
           {[
             ['▦', 'Dashboard', true],
             ['◫', 'Orders', false, orders.filter(o => o.status === 'PENDING').length],
@@ -39,7 +39,7 @@ export default function Admin() {
             ['◉', 'Customers'],
             ['⚙', 'Settings'],
           ].map(([icon, label, active, badge]) => (
-            <div key={label} className={`flex items-center gap-3 px-3 py-2 ${active ? 'bg-acid text-ink' : ''}`}>
+            <div key={label} className={`flex items-center gap-2 md:gap-3 px-3 py-2 whitespace-nowrap ${active ? 'bg-acid text-ink' : ''}`}>
               <span>{icon}</span><span className="flex-1">{label}</span>
               {badge ? <span className="bg-bleed text-bone px-1.5 py-0.5 text-[10px]">{badge}</span> : null}
             </div>
@@ -48,16 +48,16 @@ export default function Admin() {
       </aside>
 
       {/* MAIN */}
-      <main className="p-8 overflow-auto">
-        <div className="flex justify-between items-end mb-7">
+      <main className="p-4 md:p-8 overflow-auto">
+        <div className="flex justify-between items-end mb-5 md:mb-7">
           <div>
             <div className="font-mono text-[11px] tracking-wider2 text-muted">DASHBOARD</div>
-            <h1 className="font-display text-5xl uppercase mt-1">Morning, {user.name.split(' ')[0]}.</h1>
+            <h1 className="font-display text-3xl md:text-5xl uppercase mt-1">Morning, {user.name.split(' ')[0]}.</h1>
           </div>
         </div>
 
         {/* KPI CARDS */}
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <Kpi label="REVENUE" value={stats ? `₹${(stats.revenueINR / 1000).toFixed(1)}K` : '—'} />
           <Kpi label="PAID ORDERS" value={stats?.paidOrders ?? '—'} />
           <Kpi label="CUSTOMERS" value={stats?.visitors ?? '—'} />
@@ -81,14 +81,14 @@ export default function Admin() {
         )}
 
         {/* ORDERS TABLE */}
-        <div className="bg-white border border-ink mt-4">
+        <div className="bg-white border border-ink mt-4 overflow-x-auto">
           <div className="flex justify-between p-5 border-b border-ink">
             <div>
               <div className="font-mono text-[10px] tracking-wider2 text-muted">RECENT ORDERS</div>
               <div className="font-display text-xl uppercase mt-1">Needs Attention</div>
             </div>
           </div>
-          <table className="w-full text-sm">
+          <table className="w-full text-sm min-w-[640px]">
             <thead>
               <tr className="border-b border-ink bg-[#fafaf5]">
                 {['ORDER', 'CUSTOMER', 'DATE', 'ITEMS', 'TOTAL', 'STATUS'].map(h =>

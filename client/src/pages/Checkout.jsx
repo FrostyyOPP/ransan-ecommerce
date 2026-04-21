@@ -41,9 +41,9 @@ export default function Checkout() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-[1fr_420px] gap-10">
+    <div className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-10 grid md:grid-cols-[1fr_420px] gap-6 md:gap-10">
       <form onSubmit={submit} className="space-y-5">
-        <h1 className="font-display text-5xl uppercase">Checkout.</h1>
+        <h1 className="font-display text-4xl md:text-5xl uppercase">Checkout.</h1>
         <div className="font-mono text-[10px] tracking-wider2 text-muted">SHIPPING ADDRESS</div>
         <Input label="FULL NAME" value={form.name} onChange={up('name')} required />
         <Input label="STREET ADDRESS" value={form.line1} onChange={up('line1')} required />

@@ -23,35 +23,35 @@ export default function Home() {
           alt=""
           className="absolute inset-0 w-full h-full object-cover opacity-60"
         />
-        <div className="relative max-w-7xl mx-auto px-6 py-24">
-          <div className="font-mono text-[11px] tracking-wider2">DROP 04 · SPRING/SUMMER '26 · LIVE NOW</div>
-          <h1 className="font-display uppercase leading-[0.88] tracking-[-0.04em] mt-10"
-              style={{ fontSize: 'clamp(80px, 14vw, 220px)' }}>
+        <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
+          <div className="font-mono text-[10px] md:text-[11px] tracking-wider2">DROP 04 · SPRING/SUMMER '26 · LIVE NOW</div>
+          <h1 className="font-display uppercase leading-[0.88] tracking-[-0.04em] mt-6 md:mt-10"
+              style={{ fontSize: 'clamp(56px, 14vw, 220px)' }}>
             NOT FOR<br />
             <span className="text-acid">EVERYONE.</span><br />
             <span style={{ WebkitTextStroke: '1.5px #F2EFE8', color: 'transparent' }}>RANSAN®</span>
           </h1>
-          <div className="flex gap-3 mt-12">
+          <div className="flex flex-wrap gap-3 mt-8 md:mt-12">
             <Link to="/shop"><BigBtn variant="acid">SHOP DROP 04 →</BigBtn></Link>
             <BigBtn className="!bg-transparent !text-bone !border-bone">THE LOOKBOOK</BigBtn>
           </div>
         </div>
-        <div className="absolute top-5 right-8 text-right font-mono text-[10px] tracking-wider2">
+        <div className="hidden md:block absolute top-5 right-8 text-right font-mono text-[10px] tracking-wider2">
           N 19°04'34"<br />E 72°52'38"<br />MUMBAI · IN
         </div>
-        <div className="absolute bottom-5 right-8 font-mono text-[10px] tracking-wider2">↓ SCROLL / 01 · 12</div>
+        <div className="hidden md:block absolute bottom-5 right-8 font-mono text-[10px] tracking-wider2">↓ SCROLL / 01 · 12</div>
       </section>
 
       <Ticker />
 
       {/* CATEGORIES */}
-      <section className="max-w-7xl mx-auto px-6 py-20 border-b border-ink">
-        <div className="flex justify-between items-end mb-8">
+      <section className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20 border-b border-ink">
+        <div className="flex justify-between items-end mb-6 md:mb-8 gap-3">
           <div>
-            <div className="font-mono text-[11px] tracking-wider2 text-muted">01 / CATEGORY</div>
-            <h2 className="font-display text-5xl md:text-6xl uppercase mt-2">Shop The Grid.</h2>
+            <div className="font-mono text-[10px] md:text-[11px] tracking-wider2 text-muted">01 / CATEGORY</div>
+            <h2 className="font-display text-4xl md:text-6xl uppercase mt-2">Shop The Grid.</h2>
           </div>
-          <Link to="/shop" className="font-mono text-[11px] tracking-wider2 hover:text-bleed">VIEW ALL →</Link>
+          <Link to="/shop" className="font-mono text-[10px] md:text-[11px] tracking-wider2 hover:text-bleed whitespace-nowrap">VIEW ALL →</Link>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {cats.map((c, i) => (
@@ -69,11 +69,11 @@ export default function Home() {
       </section>
 
       {/* NEW IN */}
-      <section className="max-w-7xl mx-auto px-6 py-20 border-b border-ink">
-        <div className="flex justify-between items-end mb-8">
+      <section className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20 border-b border-ink">
+        <div className="flex justify-between items-end mb-6 md:mb-8">
           <div>
-            <div className="font-mono text-[11px] tracking-wider2 text-muted">02 / NEW IN</div>
-            <h2 className="font-display text-5xl md:text-6xl uppercase mt-2">Fresh Off The Rack.</h2>
+            <div className="font-mono text-[10px] md:text-[11px] tracking-wider2 text-muted">02 / NEW IN</div>
+            <h2 className="font-display text-4xl md:text-6xl uppercase mt-2">Fresh Off The Rack.</h2>
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -83,10 +83,10 @@ export default function Home() {
 
       {/* SPLIT FEATURE */}
       <section className="grid md:grid-cols-2 border-b border-ink">
-        <div className="bg-acid p-10 md:p-16 flex flex-col justify-between min-h-[520px]">
-          <div className="font-mono text-[11px] tracking-wider2">03 / THE FIT</div>
+        <div className="bg-acid p-8 md:p-16 flex flex-col justify-between min-h-[380px] md:min-h-[520px] order-2 md:order-1">
+          <div className="font-mono text-[10px] md:text-[11px] tracking-wider2">03 / THE FIT</div>
           <div>
-            <h2 className="font-display uppercase leading-[0.9] text-6xl md:text-8xl">Made<br />For The<br />Streets.</h2>
+            <h2 className="font-display uppercase leading-[0.9] text-5xl md:text-8xl mt-6 md:mt-0">Made<br />For The<br />Streets.</h2>
             <p className="max-w-[420px] text-sm leading-7 mt-6">
               Heavyweight cottons. Oversized cuts. Boxy silhouettes.
               Built for the ones who move different.
@@ -94,25 +94,25 @@ export default function Home() {
             <Link to="/about" className="inline-block mt-6"><BigBtn>READ THE STORY →</BigBtn></Link>
           </div>
         </div>
-        <div className="min-h-[520px] bg-bone-2">
+        <div className="min-h-[320px] md:min-h-[520px] bg-bone-2 order-1 md:order-2">
           <img src="https://loremflickr.com/1200/900/streetwear,editorial?lock=2" alt="" className="w-full h-full object-cover" />
         </div>
       </section>
 
       {/* DROP COUNTDOWN */}
-      <section className="bg-ink text-bone px-6 py-20">
+      <section className="bg-ink text-bone px-4 md:px-6 py-12 md:py-20">
         <div className="max-w-7xl mx-auto">
-          <div className="font-mono text-[11px] tracking-wider2 text-acid">04 / NEXT DROP</div>
-          <h2 className="font-display uppercase leading-[0.9] tracking-[-0.03em] text-6xl md:text-8xl mt-3">
+          <div className="font-mono text-[10px] md:text-[11px] tracking-wider2 text-acid">04 / NEXT DROP</div>
+          <h2 className="font-display uppercase leading-[0.9] tracking-[-0.03em] text-5xl md:text-8xl mt-3">
             DROP 05<br />
             <span className="text-acid">04 : 22 : 17 : 09</span>
           </h2>
-          <div className="flex gap-4 items-center mt-10">
+          <div className="flex flex-col md:flex-row gap-4 md:items-center mt-8 md:mt-10 max-w-lg">
             <input
               placeholder="your@email.com"
-              className="bg-transparent border-b border-bone text-bone font-mono text-sm px-0 py-2 outline-none min-w-[320px]"
+              className="w-full md:flex-1 bg-transparent border-b border-bone text-bone font-mono text-sm px-0 py-2 outline-none"
             />
-            <BigBtn variant="acid">NOTIFY ME →</BigBtn>
+            <BigBtn variant="acid" className="self-start md:self-auto">NOTIFY ME →</BigBtn>
           </div>
         </div>
       </section>

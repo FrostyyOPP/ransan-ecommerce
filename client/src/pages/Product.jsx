@@ -44,12 +44,12 @@ export default function Product() {
 
   return (
     <>
-      <div className="font-mono text-[10px] tracking-wider2 text-muted px-6 py-3 border-b border-ink">
-        HOME / SHOP / {product.category?.name?.toUpperCase()} / <b className="text-ink">{product.name.toUpperCase()} · {color?.name?.toUpperCase()}</b>
+      <div className="font-mono text-[10px] tracking-wider2 text-muted px-4 md:px-6 py-3 border-b border-ink truncate">
+        HOME / SHOP / {product.category?.name?.toUpperCase()} / <b className="text-ink">{product.name.toUpperCase()}</b>
       </div>
 
       <div className="grid md:grid-cols-[1fr_440px]">
-        <div className="border-r border-ink">
+        <div className="md:border-r border-ink">
           <div className="grid grid-cols-2 gap-px bg-ink border-b border-ink">
             {product.images?.slice(0, 4).map((src, i) =>
               <div key={i} className="aspect-square bg-bone-2">
@@ -57,23 +57,23 @@ export default function Product() {
               </div>
             )}
           </div>
-          <div className="p-10 bg-bone-2">
+          <div className="p-6 md:p-10 bg-bone-2">
             <div className="font-mono text-[10px] tracking-wider2 text-muted">05 / FIT NOTES</div>
-            <p className="text-base leading-7 max-w-[640px] mt-3">{product.fitNotes}</p>
+            <p className="text-sm md:text-base leading-7 max-w-[640px] mt-3">{product.fitNotes}</p>
           </div>
         </div>
 
-        <aside className="p-9">
+        <aside className="p-6 md:p-9">
           <div className="font-mono text-[10px] tracking-wider2 text-muted">
             RANSAN® / {product.category?.name?.toUpperCase()} / {product._id.slice(-6).toUpperCase()}
           </div>
-          <h1 className="font-display text-5xl uppercase leading-[0.95] mt-2">{product.name}</h1>
+          <h1 className="font-display text-3xl md:text-5xl uppercase leading-[0.95] mt-2">{product.name}</h1>
           <div className="flex items-center gap-3 mt-4 font-mono text-[11px] tracking-wider">
             <span>{'★'.repeat(Math.round(product.rating))}{'☆'.repeat(5 - Math.round(product.rating))}</span>
             <span className="text-muted">{product.rating.toFixed(1)} · {product.reviewsCount} REVIEWS</span>
           </div>
-          <div className="flex items-baseline gap-3 mt-5">
-            <div className="font-display text-4xl">{format(product.priceINR)}</div>
+          <div className="flex flex-wrap items-baseline gap-3 mt-5">
+            <div className="font-display text-3xl md:text-4xl">{format(product.priceINR)}</div>
             {product.compareAtINR && (
               <>
                 <div className="font-mono text-xs text-muted line-through">{format(product.compareAtINR)}</div>
@@ -142,9 +142,9 @@ export default function Product() {
       </div>
 
       {related?.length > 0 && (
-        <section className="px-6 py-14 border-t border-ink">
-          <h2 className="font-display text-4xl uppercase mb-6">Pair It With.</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <section className="px-4 md:px-6 py-10 md:py-14 border-t border-ink">
+          <h2 className="font-display text-3xl md:text-4xl uppercase mb-5 md:mb-6">Pair It With.</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
             {related.map(p => <ProductCard key={p._id} product={p} />)}
           </div>
         </section>

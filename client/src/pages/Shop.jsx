@@ -22,6 +22,7 @@ export default function Shop() {
   const [size, setSize] = useState(sp.get('size') || '');
   const [color, setColor] = useState(sp.get('color') || '');
   const [sort, setSort] = useState(sp.get('sort') || 'newest');
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     api.get('/categories').then(r => setCats(r.data));
@@ -47,15 +48,15 @@ export default function Shop() {
 
   return (
     <>
-      <section className="px-6 py-9 border-b border-ink">
+      <section className="px-4 md:px-6 py-6 md:py-9 border-b border-ink">
         <div className="font-mono text-[10px] tracking-wider2 text-muted">
           HOME / SHOP / <b className="text-ink">{title.toUpperCase()}</b>
         </div>
-        <div className="flex justify-between items-end mt-3 flex-wrap gap-4">
-          <h1 className="font-display text-7xl md:text-8xl uppercase leading-[0.9]">
-            {title.toUpperCase()}<span className="text-muted text-2xl ml-3">[ {total} ]</span>
+        <div className="flex justify-between items-end mt-3 flex-wrap gap-3">
+          <h1 className="font-display text-5xl md:text-8xl uppercase leading-[0.9]">
+            {title.toUpperCase()}<span className="text-muted text-xl md:text-2xl ml-2 md:ml-3">[ {total} ]</span>
           </h1>
-          <div className="flex gap-3 font-mono text-[11px] tracking-wider2">
+          <div className="flex gap-2 md:gap-3 font-mono text-[10px] md:text-[11px] tracking-wider2">
             <span>SORT:</span>
             <select value={sort} onChange={(e) => setSort(e.target.value)} className="bg-transparent border-b border-ink outline-none">
               <option value="newest">NEWEST</option>
@@ -68,11 +69,18 @@ export default function Shop() {
       </section>
 
       <div className="grid md:grid-cols-[260px_1fr]">
-        <aside className="p-7 border-r border-ink self-start md:sticky md:top-[64px]">
-          <div className="flex justify-between items-baseline mb-6">
+        <aside className="p-5 md:p-7 border-b md:border-b-0 md:border-r border-ink self-start md:sticky md:top-[64px]">
+          <button
+            onClick={() => setFiltersOpen(!filtersOpen)}
+            className="md:hidden w-full flex justify-between items-baseline mb-4">
+            <span className="font-display text-lg uppercase">Filters{(size || color) ? ` · ${[size, color].filter(Boolean).join(', ')}` : ''}</span>
+            <span className="font-mono text-[10px] tracking-wider">{filtersOpen ? 'HIDE −' : 'SHOW +'}</span>
+          </button>
+          <div className="hidden md:flex justify-between items-baseline mb-6">
             <div className="font-display text-lg uppercase">Filters</div>
             <button onClick={() => { setSize(''); setColor(''); }} className="font-mono text-[10px] tracking-wider">CLEAR</button>
           </div>
+          <div className={`${filtersOpen ? 'block' : 'hidden'} md:block`}>
           <Section title="CATEGORY">
             <ul className="space-y-2 text-sm">
               <li><Link to="/shop" className={!slug ? 'underline' : ''}>All</Link></li>
@@ -105,11 +113,13 @@ export default function Shop() {
               )}
             </div>
           </Section>
+            <button onClick={() => { setSize(''); setColor(''); setFiltersOpen(false); }} className="md:hidden font-mono text-[10px] tracking-wider underline">CLEAR FILTERS</button>
+          </div>
         </aside>
 
-        <section className="p-6">
+        <section className="p-4 md:p-6">
           {products.length === 0 && <div className="font-mono text-sm text-muted">No products match your filters.</div>}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
             {products.map(p => <ProductCard key={p._id} product={p} />)}
           </div>
         </section>

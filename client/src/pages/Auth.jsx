@@ -30,14 +30,14 @@ export default function Auth() {
     <div className="grid md:grid-cols-2 min-h-[calc(100vh-64px)]">
       <div className="bg-ink text-bone relative overflow-hidden">
         <img src="https://loremflickr.com/1000/1400/streetwear,urban?lock=3" alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-        <div className="relative p-12 h-full flex flex-col justify-between min-h-[500px]">
-          <Logo className="text-bone" size={28} />
+        <div className="relative p-8 md:p-12 h-full flex flex-col justify-between gap-6 md:gap-0 min-h-[300px] md:min-h-[500px]">
+          <Logo className="text-bone" size={24} />
           <div>
-            <div className="font-mono text-[11px] tracking-wider2 text-acid">MEMBER ACCESS</div>
-            <h1 className="font-display uppercase leading-[0.9] text-6xl md:text-8xl mt-4">
+            <div className="font-mono text-[10px] md:text-[11px] tracking-wider2 text-acid">MEMBER ACCESS</div>
+            <h1 className="font-display uppercase leading-[0.9] text-5xl md:text-8xl mt-3 md:mt-4">
               JOIN<br />THE<br /><span className="text-acid">GANG.</span>
             </h1>
-            <p className="max-w-[360px] text-sm leading-7 mt-6 text-bone/80">
+            <p className="max-w-[360px] text-sm leading-7 mt-4 md:mt-6 text-bone/80">
               Early drops. Member-only sales. Exclusive fits. No spam, ever.
             </p>
           </div>
@@ -45,7 +45,7 @@ export default function Auth() {
         </div>
       </div>
 
-      <div className="p-8 md:p-16 flex items-center">
+      <div className="p-6 md:p-16 flex items-center">
         <form onSubmit={submit} className="w-full max-w-md mx-auto">
           <div className="flex border-b border-ink font-display text-xl uppercase">
             {['login', 'signup'].map(k => (
